@@ -34,3 +34,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+npm install mongoose bcrypt axios 
+
+const User=mongoose.model("User",userSchema);
+here it is use in place of this because to avoid duplication means that when the model is create then it go to in mongoose list and here in nextjs a hot coding is done that in  every change the so that result the possibility that the model may be created multiple time so here first ( mongoose.models.User ) by this we check is there model is present or not if not present then  it created
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+
