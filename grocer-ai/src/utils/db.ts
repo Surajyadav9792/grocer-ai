@@ -17,7 +17,7 @@ import mongoose from "mongoose";
     if(!cached.promise){
         cached.promise=mongoose.connect(MongoConectionString).then((conn)=>conn.connection) //  through mongoose.connect we got a string but we need a promise so  by .then((conn)=>conn.connection)  we get a promise which is go for resolve
     }
-    // if not present then may be have promise and here we resolve the promise 
+    // if not present then may be have promise and here we resolve the promise
     try{
         const conn=await cached.promise
         return conn
