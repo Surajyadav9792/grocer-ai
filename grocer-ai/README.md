@@ -43,3 +43,6 @@ here it is use in place of this because to avoid duplication means that when the
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 ---> In global.d.ts we decleare the mongoose obj in global
+here we use Auth.js for authentication
+we use framer-motion for providing animation
+we use icon for lucide-react
