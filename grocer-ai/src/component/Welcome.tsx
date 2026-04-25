@@ -1,7 +1,11 @@
 "use client"
 import { ArrowRight, Bike, ShoppingBasket } from "lucide-react"
 import { motion } from "motion/react" 
-function Welcome() {
+type propType={
+    //we tells that nextStep is function which take parameter as a number and return void type
+    nextStep:(s:number)=>void
+}
+function Welcome({nextStep}:propType) {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen text-center p-10'>
         <motion.div
@@ -74,8 +78,9 @@ function Welcome() {
     }}
         className="inline-flex items-center gap-2 bg-green-700  hover:bg-amber-600 text-white 
         font-semibold py-3 px-8 rounded-2xl shadow-md transition-all duration-100"
+        onClick={()=>nextStep(2)}
       >Next
-      <ArrowRight />
+  <ArrowRight />
   </motion.button>
     </div>
   )
