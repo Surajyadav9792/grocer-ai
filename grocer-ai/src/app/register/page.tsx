@@ -7,7 +7,7 @@ const Register = () => {
   return (
     <div>
       {/* here nextStep is a props and inside we send setStep */}
-       {step==1 ? <Welcome nextStep={setStep} /> : <RegisterForm/>}
+       {step==1 ? <Welcome nextStep={setStep} /> : <RegisterForm previousStep={setStep}/>}
     </div>
   )
 }
