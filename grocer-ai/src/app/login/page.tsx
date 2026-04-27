@@ -15,7 +15,23 @@ function Login() {
       const router=useRouter();
 
 
-    
+    const handleLogin = async (e:any) => {
+      e.preventDefault(); // stop reload while form is submit
+      setLoading(true);
+   try {
+    //here the signIn function provide by nextAuth here it take provide and 
+    // which basis you login here if we use google the we replace credential by the google
+    await signIn("credentials",{
+        email,password
+    }) 
+    setLoading(false);
+  } catch (error) {
+    console.error(error);
+  }
+  finally {
+    setLoading(false); 
+  }
+};
   return (
     <div className='flex flex-col items-center justify-center min-h-screen px-6 py-10 bg-white relative'>
 
@@ -40,7 +56,7 @@ function Login() {
 
 
   <motion.form className='flex flex-col gap-5 w-full max-w-sm'
-      
+       onSubmit={handleLogin} //by this out form is getting submitted
      initial={{
       opacity:0
      }}
