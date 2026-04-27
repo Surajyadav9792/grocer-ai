@@ -6,46 +6,18 @@ import Image from 'next/image'
 import googleImg from '@/assests/google.png'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-type propType={
-    //we tells that nextStep is function which take parameter as a number and return void type
-    previousStep:(s:number)=>void
-}
-function RegisterForm({previousStep}:propType) {
-  const [name,setName]=useState("")
-   const [email,setEmail]=useState("")
-    const [password,setPassword]=useState("")
-     const [mobile,setMobile]=useState("")
-     const [loading, setLoading] = useState(false);
-     const router=useRouter();
+import { signIn } from 'next-auth/react'
+
+function Login() {
+      const [email,setEmail]=useState("")
+      const [password,setPassword]=useState("")
+      const [loading, setLoading] = useState(false);
+      const router=useRouter();
 
 
-    const handleRegister = async (e:any) => {
-      e.preventDefault(); // stop reload while form is submit
-      setLoading(true);
-   try {
-    const result = await axios.post("/api/auth/register", {
-      name,
-      email,
-      password,
-      mobile
-    });
-    console.log(result.data);
-    setLoading(false);
-  } catch (error) {
-    console.error(error);
-  }
-  finally {
-    setLoading(false); 
-  }
-};
+    
   return (
     <div className='flex flex-col items-center justify-center min-h-screen px-6 py-10 bg-white relative'>
-        <div className='absolute top-6 left-6 flex items-center gap-2
-         text-green-700 hover:text-green-800 transition-colors cursor-pointer' 
-         onClick={()=>previousStep(1)}>
-          <ArrowLeft className='w-5 h-5'/>
-          <span className='font-medium'>Back</span>
-        </div>
 
     <motion.h1 className='text-4xl font-extrabold text-green-700 mb-2'
     initial={{
@@ -60,15 +32,15 @@ function RegisterForm({previousStep}:propType) {
       duration:0.6
     }}
     >
-      Create Account  </motion.h1>
+      Welcome back to FreshCart  </motion.h1>
       <p className='text-gray-600 mb-8 flex item-center'>
-        joint FreshCart
+        Login to FreshCart
         <Leaf className='w-5 h-5 text-green-600'/>
       </p>
 
 
   <motion.form className='flex flex-col gap-5 w-full max-w-sm'
-       onSubmit={handleRegister}
+      
      initial={{
       opacity:0
      }}
@@ -79,16 +51,6 @@ function RegisterForm({previousStep}:propType) {
       duration:0.6
      }}
       >
-     <div className='relative '>
-      <User className='absolute left-3 top-3.5 w-5 h-5 text-gray-400'/>
-      <input  type="text" placeholder='Enter Name' className="w-full border border-gray-300 rounded-xl
-        py-3 pl-10 pr-4 text-gray-800 
-        focus:ring-2 focus:ring-green-500 focus:outline-none"   
-        onChange={(e)=>setName(e.target.value)}
-        value={name}
-        />
-        
-      </div>
 
       <div className='relative '>
       <Mail className='absolute left-3 top-3.5 w-5 h-5 text-gray-400'/>
@@ -100,16 +62,7 @@ function RegisterForm({previousStep}:propType) {
         />
       </div>
 
-       <div className='relative '>
-      <Phone className='absolute left-3 top-3.5 w-5 h-5 text-gray-400'/>
-      <input  type="tel" placeholder='Enter mobile number' className="w-full border border-gray-300 rounded-xl
-        py-3 pl-10 pr-4 text-gray-800 
-        focus:ring-2 focus:ring-green-500 focus:outline-none"   
-        onChange={(e)=>setMobile(e.target.value)}
-        value={mobile}
-        />
-        
-      </div>
+
 
       <div className='relative '>
       <Lock className='absolute left-3 top-3.5 w-5 h-5 text-gray-400'/>
@@ -122,12 +75,9 @@ function RegisterForm({previousStep}:propType) {
         
       </div>
 
-     
-
-
        {
           (()=>{
-            const formValidation=name!=="" && email!=="" && password !=="" &&  mobile !== "";
+            const formValidation=email!=="" && password !=="";
             return <button disabled={!formValidation || loading} className={`w-full font-semibold py-3 rounded-xl transition-all duration-200
              shadow-md inline-flex items-center justify-center gap-2
                 ${
@@ -137,9 +87,9 @@ function RegisterForm({previousStep}:propType) {
               {loading ? (
               <>
              <Loader2 className="w-5 h-5 animate-spin" />
-             Registering...
+             Login...
               </>) :
-               ("Register")}
+               ("Login")}
             </button>
           })() 
        }
@@ -157,12 +107,12 @@ function RegisterForm({previousStep}:propType) {
      
       </motion.form>
     <p  className='text-gray-600 mt-6 text-sm flex items-center gap-1 cursor-pointer'
-      onClick={()=>router.push("/login")}>Already have an account ? 
-  <LogIn className='w-4 h-4' /> <span className='text-green-600'>Sign in</span>
+     onClick={()=>router.push("/register")}>Want to Create an account ? 
+    <LogIn className='w-4 h-4' /> <span className='text-green-600'>SignUp</span>
     </p>
 
     </div>
   )
 }
 
-export default RegisterForm
+export default Login
