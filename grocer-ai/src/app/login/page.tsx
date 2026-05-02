@@ -1,18 +1,19 @@
 "use client"
-import { ArrowLeft, Leaf, Loader2, Lock, LogIn, Mail, Phone, User } from 'lucide-react'
+import { Leaf, Loader2, Lock, LogIn, Mail} from 'lucide-react'
 import { motion } from "motion/react" 
 import React, { useState } from 'react'
 import Image from 'next/image'
 import googleImg from '@/assests/google.png'
-import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 function Login() {
       const [email,setEmail]=useState("")
       const [password,setPassword]=useState("")
       const [loading, setLoading] = useState(false);
       const router=useRouter();
+      const session=useSession();
+      console.log(session);
 
 
     const handleLogin = async (e:any) => {
@@ -116,9 +117,10 @@ function Login() {
       </div>
 
       <button className='w-full flex items-center justify-center gap-3 border border-gray-300 
-      hover:bg-gray-100 py-3 rounded-xl text-gray-700 font-medium transition-all duration-200'>
+      hover:bg-gray-100 py-3 rounded-xl text-gray-700 font-medium transition-all duration-200'
+      onClick={()=>signIn("google")}>
         <Image src={googleImg} width={20} height={20} alt='google'/>
-        Countinue with Google
+        Countinue with Google 
       </button>
      
       </motion.form>

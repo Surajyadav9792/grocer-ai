@@ -6,6 +6,7 @@ import Image from 'next/image'
 import googleImg from '@/assests/google.png'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 type propType={
     //we tells that nextStep is function which take parameter as a number and return void type
     previousStep:(s:number)=>void
@@ -150,7 +151,9 @@ function RegisterForm({previousStep}:propType) {
       </div>
 
       <button className='w-full flex items-center justify-center gap-3 border border-gray-300 
-      hover:bg-gray-100 py-3 rounded-xl text-gray-700 font-medium transition-all duration-200'>
+      hover:bg-gray-100 py-3 rounded-xl text-gray-700 font-medium transition-all duration-200'
+      
+        onClick={()=>signIn("google")}> 
         <Image src={googleImg} width={20} height={20} alt='google'/>
         Countinue with Google
       </button>

@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 interface IUser{
     name:string,
     email:string,
-    password:string,
-    mobile:string,
-    role:"user"|"deliveryBoy"|"admin"
+    password?:string,
+    mobile?:string,
+    role:"user"|"deliveryBoy"|"admin",
+    image?:string
 }
 const userSchema=new mongoose.Schema<IUser>({
     name:{
@@ -19,16 +20,19 @@ const userSchema=new mongoose.Schema<IUser>({
     },
     password:{
         type:String,
-        required:true
+        required:false
     },
     mobile:{
            type:String,
-           required:true
+           required:false
     },
     role:{
         type:String,
         enum:["user","deliveryBoy","admin"],
         default:"user"
+    },
+    image:{
+        type:String,
     }
    
  },
