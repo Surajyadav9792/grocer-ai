@@ -31,6 +31,7 @@ function RegisterForm({previousStep}:propType) {
       mobile
     });
     console.log(result.data);
+    router.push("/login")
     setLoading(false);
   } catch (error) {
     console.error(error);
@@ -150,13 +151,13 @@ function RegisterForm({previousStep}:propType) {
         <span className='flex-1 h-px bg-gray-200'></span>
       </div>
 
-      <button className='w-full flex items-center justify-center gap-3 border border-gray-300 
+      <div className='w-full flex items-center justify-center gap-3 border border-gray-300 
       hover:bg-gray-100 py-3 rounded-xl text-gray-700 font-medium transition-all duration-200'
       
-        onClick={()=>signIn("google")}> 
+        onClick={()=>signIn("google",{callbackUrl:"/"})}> 
         <Image src={googleImg} width={20} height={20} alt='google'/>
         Countinue with Google
-      </button>
+      </div>
      
       </motion.form>
     <p  className='text-gray-600 mt-6 text-sm flex items-center gap-1 cursor-pointer'
